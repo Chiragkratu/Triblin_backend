@@ -1,14 +1,8 @@
-from django.shortcuts import render
 from rest_framework import generics, permissions
 from rest_framework.response import Response 
-from rest_framework.decorators import api_view
 from rest_framework.authtoken.models import Token
 from .serializers import UserSerializer, LoginSerializer, RegisterSerializer
-from NorenRestApiPy.NorenApi import NorenApi
-from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
-import datetime
 
 
 class RegisterAPI(generics.GenericAPIView):
