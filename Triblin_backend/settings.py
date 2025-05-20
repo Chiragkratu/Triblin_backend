@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-+!n@-m&hpmtnmbspbsx98@8ws4zbx@k-gd@cqpu%lj*thigwv#
 
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['triblinbackend-production.up.railway.app']
+ALLOWED_HOSTS = ['https://triblinbackend-production.up.railway.app/']
 
 
 # Application definition
