@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-+!n@-m&hpmtnmbspbsx98@8ws4zbx@k-gd@cqpu%lj*thigwv#
 
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['https://triblinbackend-production.up.railway.app/']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -60,6 +60,8 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -94,17 +96,27 @@ WSGI_APPLICATION = 'Triblin_backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'Monikee',  # Replace with your database name
+#         'USER': 'postgres',      # Replace with your PostgreSQL username
+#         'PASSWORD': 'Soquiry@1',  # Replace with your PostgreSQL password
+#         'HOST': '100.71.72.28',      # Use localhost for local connection
+#         'PORT': '5432',           # Default PostgreSQL port
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Monikee',  # Replace with your database name
-        'USER': 'postgres',      # Replace with your PostgreSQL username
-        'PASSWORD': 'Soquiry@1',  # Replace with your PostgreSQL password
-        'HOST': '100.71.72.28',      # Use localhost for local connection
-        'PORT': '5432',           # Default PostgreSQL port
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': 'TFKYndxjJSxqUHukmbbjgjherYVBuVJl',
+        'HOST': 'postgres.railway.internal',
+        'PORT': '5432',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
