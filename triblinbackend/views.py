@@ -30,9 +30,7 @@ class LoginAPI(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data
         token, created = Token.objects.get_or_create(user=user)
-        print('yes')
         return Response({
-            "user": UserSerializer(user).data,
             "token": token.key
         })
     
@@ -42,13 +40,18 @@ class UserAPI(generics.RetrieveAPIView):
     serializer_class = UserSerializer
 
     def get_object(self):
-        return self.request.user
+        return Response({"message":"Ok"}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class PlasticItemView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
     def post(self, request):
-        serializer = PlasticItemSerializer(data=request.data)
-        print(request.data)
+        username = request.user.username 
+        data = request.data.copy()
+        data['username'] = username
+        serializer = PlasticItemSerializer(data=data)
+        print(data)
         print(serializer.is_valid())
         
         if serializer.is_valid(): 
@@ -57,7 +60,7 @@ class PlasticItemView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request):
-        username = request.query_params.get('username', None)
+        username = request.user.username 
         if username is not None:
             items = PlasticItem.objects.filter(username=username)
             serializer = PlasticItemSerializer(items, many=True)
