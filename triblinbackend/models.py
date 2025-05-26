@@ -1,7 +1,6 @@
 from django.db import models
 import uuid
 
-
 class PlasticItem(models.Model):
     item_id = models.CharField(max_length=100, default=uuid.uuid4, unique=True)  
     username = models.CharField(max_length=100)

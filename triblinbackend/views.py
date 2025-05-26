@@ -39,8 +39,8 @@ class UserAPI(generics.RetrieveAPIView):
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = UserSerializer
 
-    def get_object(self):
-        return Response({"message":"Ok"}, status=status.HTTP_400_BAD_REQUEST)
+    def get(self,request):
+        return Response(status=status.HTTP_200_OK)
 
 
 class PlasticItemView(APIView):
