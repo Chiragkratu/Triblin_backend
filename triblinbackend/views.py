@@ -1,8 +1,12 @@
 from rest_framework import generics, permissions
 from rest_framework.response import Response 
 from rest_framework.authtoken.models import Token
-from .serializers import UserSerializer, LoginSerializer, RegisterSerializer
+from .serializers import UserSerializer, LoginSerializer, RegisterSerializer, PlasticItemSerializer
 from rest_framework.response import Response
+from rest_framework import status
+from .models import PlasticItem
+from .serializers import PlasticItemSerializer
+from rest_framework.views import APIView
 
 
 class RegisterAPI(generics.GenericAPIView):
@@ -39,3 +43,23 @@ class UserAPI(generics.RetrieveAPIView):
 
     def get_object(self):
         return self.request.user
+
+
+class PlasticItemView(APIView):
+    def post(self, request):
+        serializer = PlasticItemSerializer(data=request.data)
+        print(request.data)
+        print(serializer.is_valid())
+        
+        if serializer.is_valid(): 
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def get(self, request):
+        username = request.query_params.get('username', None)
+        if username is not None:
+            items = PlasticItem.objects.filter(username=username)
+            serializer = PlasticItemSerializer(items, many=True)
+            return Response(serializer.data)
+        return Response({'error': 'Username parameter is required.'}, status=status.HTTP_400_BAD_REQUEST)

@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User 
 from rest_framework import serializers
+from .models import PlasticItem
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -33,3 +34,8 @@ class RegisterSerializer(serializers.ModelSerializer):
         return user
 
 
+
+class PlasticItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PlasticItem
+        fields = '__all__'

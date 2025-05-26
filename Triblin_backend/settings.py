@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from decouple import config
 from pathlib import Path
+import dj_database_url 
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -108,14 +109,15 @@ WSGI_APPLICATION = 'Triblin_backend.wsgi.application'
 # }
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': 'TFKYndxjJSxqUHukmbbjgjherYVBuVJl',
-        'HOST': 'postgres.railway.internal',
-        'PORT': '5432',
-    }
+    'default': dj_database_url.config(default='postgresql://postgres:TFKYndxjJSxqUHukmbbjgjherYVBuVJl@hopper.proxy.rlwy.net:51056/railway')
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'railway',
+    #     'USER': 'postgres',
+    #     'PASSWORD': 'TFKYndxjJSxqUHukmbbjgjherYVBuVJl',
+    #     'HOST': 'postgres.railway.internal',
+    #     'PORT': '5432',
+    # }
 }
 
 # Password validation
