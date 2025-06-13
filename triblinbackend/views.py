@@ -110,8 +110,7 @@ class PlasticItemView(APIView):
             return Response({"error": f"Replacement creation failed: {str(e)}"}, status=status.HTTP_400_BAD_REQUEST)
 
         return Response({"message": "Replacement recorded successfully."}, status=status.HTTP_200_OK)
-class PlasticItemListView(APIView):
-
+    
     def post(self, request):
         user_id = request.user.id
         data = request.data.copy()
@@ -135,7 +134,7 @@ class PlasticItemListView(APIView):
     def get(self, request):
         user_id = request.user.id
         if user_id is not None:
-            items = Plastic_Item.objects.filter(user=user_id)
+            items = Plastic_Item.objects.filter(user_id=user_id)
             serializer = PlasticItemSerializer(items, many=True)
             return Response(serializer.data)
         return Response({'error': 'Username parameter is required.'}, status=status.HTTP_400_BAD_REQUEST)
